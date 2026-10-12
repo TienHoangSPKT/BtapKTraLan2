@@ -28,12 +28,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTaoCongViec.setOnClickListener {
-            val tenCongViec = edtTenCongViec.text.toString()
-            val moTa = edtMoTa.text.toString()
+            val congViec = CongViec(
+                tenCongViec = edtTenCongViec.text.toString(),
+                moTa = edtMoTa.text.toString()
+            )
 
             val intent = Intent(this, ChiTietCongViecActivity::class.java)
-            intent.putExtra("TEN_CONG_VIEC", tenCongViec)
-            intent.putExtra("MO_TA", moTa)
+            intent.putExtra("CONG_VIEC", congViec)
             startActivity(intent)
         }
     }

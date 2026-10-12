@@ -1,6 +1,7 @@
 package com.example.bitp2mnhnh
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -13,17 +14,17 @@ class ChiTietCongViecActivity : AppCompatActivity() {
     private lateinit var tvMoTa: TextView
     private lateinit var btnChinhSua: Button
 
-    private var tenCongViec: String = ""
-    private var moTa: String = ""
+    private lateinit var congViec: CongViec
 
     private val trinhChinhSua = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { ketQua ->
         if (ketQua.resultCode == RESULT_OK) {
-            tenCongViec = ketQua.data?.getStringExtra("TEN_CONG_VIEC") ?: tenCongViec
-            moTa = ketQua.data?.getStringExtra("MO_TA") ?: moTa
-            tvTenCongViec.text = tenCongViec
-            tvMoTa.text = moTa
+            val congViecMoi = layCongViec(ketQua.data)
+            if (congViecMoi != null) {
+                congViec = congViecMoi
+                hienThiThongTin()
+            }
         }
     }
 
@@ -35,16 +36,28 @@ class ChiTietCongViecActivity : AppCompatActivity() {
         tvMoTa = findViewById(R.id.tvMoTa)
         btnChinhSua = findViewById(R.id.btnChinhSua)
 
-        tenCongViec = intent.getStringExtra("TEN_CONG_VIEC") ?: ""
-        moTa = intent.getStringExtra("MO_TA") ?: ""
-        tvTenCongViec.text = tenCongViec
-        tvMoTa.text = moTa
+        congViec = layCongViec(intent) ?: CongViec("", "")
+        hienThiThongTin()
 
         btnChinhSua.setOnClickListener {
             val intentChinhSua = Intent(this, ChinhSuaCongViecActivity::class.java)
-            intentChinhSua.putExtra("TEN_CONG_VIEC", tenCongViec)
-            intentChinhSua.putExtra("MO_TA", moTa)
+            intentChinhSua.putExtra("CONG_VIEC", congViec)
             trinhChinhSua.launch(intentChinhSua)
         }
+    }
+
+    private fun layCongViec(duLieu: Intent?): CongViec? {
+        if (duLieu == null) return null
+        return if (Build.VERSION.SDK_INT >= 33) {
+            duLieu.getParcelableExtra("CONG_VIEC", CongViec::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            duLieu.getParcelableExtra("CONG_VIEC")
+        }
+    }
+
+    private fun hienThiThongTin() {
+        tvTenCongViec.text = congViec.tenCongViec
+        tvMoTa.text = congViec.layThongTin()
     }
 }
