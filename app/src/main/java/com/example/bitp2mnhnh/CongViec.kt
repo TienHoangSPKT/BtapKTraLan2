@@ -8,4 +8,13 @@ data class CongViec(
     var tenCongViec: String,
     var moTa: String,
     var trangThai: Boolean = false
-) : Parcelable
+) : Parcelable {
+
+    fun layTrangThaiChu(): String {
+        return if (trangThai) "Đã hoàn thành" else "Chưa hoàn thành"
+    }
+
+    fun layThongTin(): String {
+        return "Tên công việc: $tenCongViec\nMô tả: $moTa\nTrạng thái: ${layTrangThaiChu()}"
+    }
+}
