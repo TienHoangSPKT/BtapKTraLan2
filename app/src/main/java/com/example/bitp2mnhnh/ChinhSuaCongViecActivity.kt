@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 
 class ChinhSuaCongViecActivity : AppCompatActivity() {
 
@@ -21,5 +22,13 @@ class ChinhSuaCongViecActivity : AppCompatActivity() {
 
         edtTenMoi.setText(intent.getStringExtra("TEN_CONG_VIEC"))
         edtMoTaMoi.setText(intent.getStringExtra("MO_TA"))
+
+        btnLuu.setOnClickListener {
+            val ketQua = Intent()
+            ketQua.putExtra("TEN_CONG_VIEC", edtTenMoi.text.toString())
+            ketQua.putExtra("MO_TA", edtMoTaMoi.text.toString())
+            setResult(RESULT_OK, ketQua)
+            finish()
+        }
     }
 }
