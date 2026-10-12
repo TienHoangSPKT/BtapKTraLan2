@@ -1,5 +1,6 @@
 package com.example.bitp2mnhnh
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -24,6 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         btnXemDanhSach.setOnClickListener {
             Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show()
+        }
+
+        btnTaoCongViec.setOnClickListener {
+            val tenCongViec = edtTenCongViec.text.toString()
+            val moTa = edtMoTa.text.toString()
+
+            val intent = Intent(this, ChiTietCongViecActivity::class.java)
+            intent.putExtra("TEN_CONG_VIEC", tenCongViec)
+            intent.putExtra("MO_TA", moTa)
+            startActivity(intent)
         }
     }
 }
