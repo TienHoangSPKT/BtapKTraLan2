@@ -41,6 +41,8 @@ class ChiTietCongViecActivity : AppCompatActivity() {
         btnChinhSua = findViewById(R.id.btnChinhSua)
         tvTrangThai = findViewById(R.id.tvTrangThai)
         cbHoanThanh = findViewById(R.id.cbHoanThanh)
+        tvMaCongViec = findViewById(R.id.tvMaCongViec)
+        btnHoanThanh = findViewById(R.id.btnHoanThanh)
 
         congViec = layCongViec(intent) ?: CongViec("", "")
         hienThiThongTin()
@@ -49,6 +51,12 @@ class ChiTietCongViecActivity : AppCompatActivity() {
             val intentChinhSua = Intent(this, ChinhSuaCongViecActivity::class.java)
             intentChinhSua.putExtra("CONG_VIEC", congViec)
             trinhChinhSua.launch(intentChinhSua)
+
+        }
+
+        btnHoanThanh.setOnClickListener {
+            congViec.trangThai = true
+            hienThiThongTin()
         }
     }
 
@@ -64,6 +72,7 @@ class ChiTietCongViecActivity : AppCompatActivity() {
 
     private fun hienThiThongTin() {
         tvTenCongViec.text = congViec.tenCongViec
+        tvMaCongViec.text = "Mã công việc: ${congViec.maCongViec}"
         tvMoTa.text = congViec.moTa
         tvTrangThai.text = "Trạng thái: ${congViec.layTrangThaiChu()}"
         tvTrangThai.setTextColor(

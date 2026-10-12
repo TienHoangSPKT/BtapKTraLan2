@@ -39,6 +39,12 @@ class MainActivity : AppCompatActivity() {
                 moTa = edtMoTa.text.toString()
             )
 
+            val congViec = CongViec(
+                tenCongViec = tenCongViec,
+                moTa = edtMoTa.text.toString(),
+                maCongViec = "CV" + (System.currentTimeMillis() % 10000)
+            )
+
             val intent = Intent(this, ChiTietCongViecActivity::class.java)
             intent.putExtra("CONG_VIEC", congViec)
             startActivity(intent)

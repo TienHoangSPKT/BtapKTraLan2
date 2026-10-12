@@ -38,4 +38,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Đã hoàn thành" />
+
+    <TextView
+            android:id="@+id/tvMaCongViec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+    <Button
+            android:id="@+id/btnHoanThanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hoàn thành" />
 </LinearLayout>
