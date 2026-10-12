@@ -26,6 +26,10 @@
             android:exported="false" />
 
     <activity
+            android:name=".ChiTietCongViecActivity"
+            android:exported="false" />
+
+    <activity
             android:name=".EditActivity"
             android:exported="false" />
 </application>
