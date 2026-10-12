@@ -28,8 +28,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnTaoCongViec.setOnClickListener {
+            val tenCongViec = edtTenCongViec.text.toString().trim()
+            if (tenCongViec.isEmpty()) {
+                edtTenCongViec.error = "Tên công việc không được để trống"
+                return@setOnClickListener
+            }
+
             val congViec = CongViec(
-                tenCongViec = edtTenCongViec.text.toString(),
+                tenCongViec = tenCongViec,
                 moTa = edtMoTa.text.toString()
             )
 

@@ -34,7 +34,13 @@ class ChinhSuaCongViecActivity : AppCompatActivity() {
         edtMoTaMoi.setText(congViec.moTa)
 
         btnLuu.setOnClickListener {
-            congViec.tenCongViec = edtTenMoi.text.toString()
+            val tenMoi = edtTenMoi.text.toString().trim()
+            if (tenMoi.isEmpty()) {
+                edtTenMoi.error = "Tên công việc không được để trống"
+                return@setOnClickListener
+            }
+
+            congViec.tenCongViec = tenMoi
             congViec.moTa = edtMoTaMoi.text.toString()
 
             val ketQua = Intent()
