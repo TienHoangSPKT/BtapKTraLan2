@@ -2,6 +2,8 @@ package com.example.bitp2mnhnh
 
 import android.content.Intent
 import android.os.Build
+import android.graphics.Color
+import android.widget.CheckBox
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
@@ -13,6 +15,8 @@ class ChiTietCongViecActivity : AppCompatActivity() {
     private lateinit var tvTenCongViec: TextView
     private lateinit var tvMoTa: TextView
     private lateinit var btnChinhSua: Button
+    private lateinit var tvTrangThai: TextView
+    private lateinit var cbHoanThanh: CheckBox
 
     private lateinit var congViec: CongViec
 
@@ -35,6 +39,8 @@ class ChiTietCongViecActivity : AppCompatActivity() {
         tvTenCongViec = findViewById(R.id.tvTenCongViec)
         tvMoTa = findViewById(R.id.tvMoTa)
         btnChinhSua = findViewById(R.id.btnChinhSua)
+        tvTrangThai = findViewById(R.id.tvTrangThai)
+        cbHoanThanh = findViewById(R.id.cbHoanThanh)
 
         congViec = layCongViec(intent) ?: CongViec("", "")
         hienThiThongTin()
@@ -58,6 +64,17 @@ class ChiTietCongViecActivity : AppCompatActivity() {
 
     private fun hienThiThongTin() {
         tvTenCongViec.text = congViec.tenCongViec
-        tvMoTa.text = congViec.layThongTin()
+        tvMoTa.text = congViec.moTa
+        tvTrangThai.text = "Trạng thái: ${congViec.layTrangThaiChu()}"
+        tvTrangThai.setTextColor(
+            if (congViec.trangThai) Color.parseColor("#2E7D32") else Color.parseColor("#C62828")
+        )
+
+        cbHoanThanh.setOnCheckedChangeListener(null)
+        cbHoanThanh.isChecked = congViec.trangThai
+        cbHoanThanh.setOnCheckedChangeListener { _, daChon ->
+            congViec.trangThai = daChon
+            hienThiThongTin()
+        }
     }
 }

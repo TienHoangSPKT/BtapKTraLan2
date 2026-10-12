@@ -25,4 +25,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Chỉnh sửa" />
+
+    <TextView
+            android:id="@+id/tvTrangThai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold" />
+
+    <CheckBox
+            android:id="@+id/cbHoanThanh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đã hoàn thành" />
 </LinearLayout>
