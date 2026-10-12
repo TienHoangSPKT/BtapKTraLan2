@@ -1,11 +1,11 @@
 package com.example.bitp2mnhnh
 
 import android.content.Intent
-import android.os.Build
 import android.graphics.Color
-import android.widget.CheckBox
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +17,8 @@ class ChiTietCongViecActivity : AppCompatActivity() {
     private lateinit var btnChinhSua: Button
     private lateinit var tvTrangThai: TextView
     private lateinit var cbHoanThanh: CheckBox
+    private lateinit var tvMaCongViec: TextView
+    private lateinit var btnHoanThanh: Button
 
     private lateinit var congViec: CongViec
 
@@ -51,7 +53,6 @@ class ChiTietCongViecActivity : AppCompatActivity() {
             val intentChinhSua = Intent(this, ChinhSuaCongViecActivity::class.java)
             intentChinhSua.putExtra("CONG_VIEC", congViec)
             trinhChinhSua.launch(intentChinhSua)
-
         }
 
         btnHoanThanh.setOnClickListener {
@@ -74,13 +75,16 @@ class ChiTietCongViecActivity : AppCompatActivity() {
         tvTenCongViec.text = congViec.tenCongViec
         tvMaCongViec.text = "Mã công việc: ${congViec.maCongViec}"
         tvMoTa.text = congViec.moTa
-        tvTrangThai.text = "Trạng thái: ${congViec.layTrangThaiChu()}"
+
+        val daXong = congViec.laDaHoanThanh()
+        tvTrangThai.text = if (daXong) "Trạng thái: Đã hoàn thành" else "Trạng thái: Chưa hoàn thành"
         tvTrangThai.setTextColor(
-            if (congViec.trangThai) Color.parseColor("#2E7D32") else Color.parseColor("#C62828")
+            if (daXong) Color.parseColor("#2E7D32") else Color.parseColor("#C62828")
         )
+        btnHoanThanh.isEnabled = !daXong
 
         cbHoanThanh.setOnCheckedChangeListener(null)
-        cbHoanThanh.isChecked = congViec.trangThai
+        cbHoanThanh.isChecked = daXong
         cbHoanThanh.setOnCheckedChangeListener { _, daChon ->
             congViec.trangThai = daChon
             hienThiThongTin()

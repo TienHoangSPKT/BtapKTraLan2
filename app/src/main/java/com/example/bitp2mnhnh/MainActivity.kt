@@ -36,11 +36,6 @@ class MainActivity : AppCompatActivity() {
 
             val congViec = CongViec(
                 tenCongViec = tenCongViec,
-                moTa = edtMoTa.text.toString()
-            )
-
-            val congViec = CongViec(
-                tenCongViec = tenCongViec,
                 moTa = edtMoTa.text.toString(),
                 maCongViec = "CV" + (System.currentTimeMillis() % 10000)
             )
