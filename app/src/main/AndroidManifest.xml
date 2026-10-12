@@ -7,9 +7,10 @@
             android:dataExtractionRules="@xml/data_extraction_rules"
             android:fullBackupContent="@xml/backup_rules"
             android:icon="@android:drawable/sym_def_app_icon"
-            android:label="Quản lý hồ sơ"
+            android:label="Quản lý công việc"
             android:supportsRtl="true"
             android:theme="@style/Theme.BàiTập2MànHình">
+
         <activity
                 android:name=".MainActivity"
                 android:exported="true">
@@ -19,20 +20,14 @@
             </intent-filter>
         </activity>
 
-    </activity>
+        <activity
+                android:name=".ChiTietCongViecActivity"
+                android:exported="false" />
 
-    <activity
-            android:name=".ChiTietCongViecActivity"
-            android:exported="false" />
+        <activity
+                android:name=".ChinhSuaCongViecActivity"
+                android:exported="false" />
 
-    <activity
-            android:name=".ChiTietCongViecActivity"
-            android:exported="false" />
-
-    <activity
-            android:name=".EditActivity"
-            android:exported="false" />
-</application>
     </application>
 
 </manifest>
